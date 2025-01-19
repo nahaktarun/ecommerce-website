@@ -3,6 +3,8 @@ import Header from "./components/Header";
 import Footer from "./components/Footer";
 import Home from "./pages/Home";
 import Products from "./pages/Products";
+import Register from "./pages/Register";
+import Login from "./pages/Login";
 export default function App() {
   return (
     // Layout
@@ -15,6 +17,8 @@ export default function App() {
           <Routes>
             <Route path="/" element={<Home />}></Route>
             <Route path="/products" element={<Products />}></Route>
+            <Route path="/register" element={<Register/>}></Route>
+            <Route path="/login" element={<Login/>}></Route>
           </Routes>
         </main>
         <Footer />
