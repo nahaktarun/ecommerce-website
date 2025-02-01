@@ -7,9 +7,12 @@ const Header = () => {
     isAuthenticated: !!state.auth.token,
     user: state.auth.user,
   }))
+
+  const {items} = useSelector((state)=> state.cart)
   const handleLogout = ()=>{
     dispatch(logoutUser());
   }
+  const cartCount = items.reduce((sum, item) => sum + item.quantity, 0);
   return (
     <header className="bg-white shadow">
       {/* Title */}
@@ -27,6 +30,14 @@ const Header = () => {
             <li>
               <Link to="/products" className="text-gray-600 hover:text-gray-800">
                 Products
+              </Link>
+            </li>
+            <li>
+              <Link to="/cart" className="text-gray-600 hover:text-gray-800 relative">
+                Cart
+                {cartCount > 0 && (
+                  <span className="ml-1 bg-red-500 text-white text-xs rounded-full px-2 py-1">{cartCount}</span>
+                )}
               </Link>
             </li>
             {!isAuthenticated ? (
@@ -48,7 +59,9 @@ const Header = () => {
                 <span className="text-gray-600">Welcome, {user?.name || 'User'}</span>
               </li>
               <li>
-                <button onClick={handleLogout} className="text-gray-600 hover:text-red-600">Logout</button>
+                <button 
+                onClick={handleLogout} 
+                className="text-gray-600 hover:text-red-600">Logout</button>
               </li>
               </>
             )}
